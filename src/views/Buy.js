@@ -139,7 +139,7 @@ const Buy = () => {
                                                 JSON.parse(e.target.value)
                                             );
                                         }}>
-                                        <option />
+                                        <option>Seleccione persona</option>
                                         {people.map((person) => (
                                             <option
                                                 key={person.id_persona}
@@ -166,7 +166,7 @@ const Buy = () => {
                                         onBlur={(e) => {
                                             setType(JSON.parse(e.target.value));
                                         }}>
-                                        <option />
+                                        <option>Seleccione tipo</option>
                                         {types.map((type) => (
                                             <option
                                                 key={type.id_venta}
@@ -206,7 +206,7 @@ const Buy = () => {
                                                     .cantidad
                                             );
                                         }}>
-                                        <option />
+                                        <option>Seleccione Producto</option>
                                         {products.map((product) => (
                                             <option
                                                 key={product.id_producto}
