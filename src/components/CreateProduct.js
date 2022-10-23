@@ -35,7 +35,7 @@ const CreateProduct = () => {
         if (descripcion === "") {
             const mesagge = "Debe rellenar todos los datos";
             setAlert(mesagge);
-        } else if (cantidad === 0) {
+        } else if (cantidad === 0 || cantidad <= 0) {
             const mesagge =
                 "No se puede agregar productos con una cantidad igual o menor a 0";
             setAlert(mesagge);

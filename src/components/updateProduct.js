@@ -57,7 +57,7 @@ const Updateproduct = () => {
         if (descripcion === "") {
             const mesagge = "Debe rellenar todos los datos";
             setAlert(mesagge);
-        } else if (amount === 0) {
+        } else if (amount === 0 || amount <= 0) {
             const mesagge =
                 "No se puede agregar productos con una cantidad igual o menor a 0";
             setAlert(mesagge);
