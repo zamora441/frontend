@@ -73,7 +73,7 @@ const Buy = () => {
                 title: "No ha seleccionado todos los datos.",
                 text: "Debe seleccionar todos los datos",
             });
-        } else if (parseInt(amount) === 0) {
+        } else if (parseInt(amount) === 0 || parseInt(amount) < 0) {
             Swal.fire({
                 icon: "error",
                 title: "No selecciono una cantidad",
