@@ -1,73 +1,79 @@
+import editIcon from "../assets/icons/editar.png";
 import deleteIcon from "../assets/icons/trash.png";
-import SaleService from "../services/SaleService";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-const SalesTable = () => {
-    const [sales, setSales] = useState([]);
+import PersonaService from "../services/PeopleServices";
+import { Link } from "react-router-dom";
+const PeopleTable = () => {
+    const [people, setPeople] = useState([]);
     const [load, setLoad] = useState(false);
     const getAll = () => {
-        SaleService.getAll()
+        PersonaService.getAll()
             .then((response) => {
-                setSales(response.data);
+                setPeople(response.data);
                 console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
     useEffect(() => {
         getAll();
     }, [load]);
 
-    const deleteSale = (id) => {
-        SaleService.remove(id)
+    const deletePerson = (id) => {
+        PersonaService.remove(id)
             .then((response) => {
                 Swal.fire({
                     icon: "success",
-                    title: "Venta eliminada correctamente",
+                    title: "Persona eliminada correctamente",
                 });
                 console.log(response.data);
                 setLoad(!load);
             })
             .catch((error) => {
+                console.log(error);
                 Swal.fire({
                     icon: "error",
-                    title: "Fallo. No se pudo eliminar la venta",
+                    title: "Fallo. No se pudo eliminar la persona",
                 });
-                console.log(error);
             });
     };
+
     return (
         <div>
             <table className="table table-hover">
                 <thead>
                     <tr className="table-dark border-dark text-info">
                         <th scope="col">Id</th>
-                        <th scope="col">Tipo venta</th>
-                        <th scope="col">Persona</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">Identificacion</th>
+                        <th scope="col">Nombre</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {/*//() despues de la => en vez de {}, ya que el () es para hacer un return de varias lineas*/}
-                    {sales.map((sale) => (
+                    {people.map((person) => (
                         <tr
                             className="border-start border-end border-info "
-                            key={sale.id_venta}>
-                            <th scope="row">{sale.id_venta}</th>
-                            <td>{sale.tipo_venta.descripcion}</td>
-                            <td>{sale.persona.nombre}</td>
-                            <td>{sale.producto.descripcion}</td>
-                            <td>{sale.cantidad}</td>
-                            <td>{sale.fecha}</td>
+                            key={person.id_persona}>
+                            <th scope="row">{person.id_persona}</th>
+                            <td>{person.identificacion}</td>
+                            <td>{person.nombre}</td>
                             <td>
+                                <Link
+                                    to={"" + person.id_persona}
+                                    className="btn">
+                                    <img
+                                        src={editIcon}
+                                        alt="icono editar"
+                                    />
+                                </Link>
                                 <button
                                     className="btn"
                                     onClick={() => {
-                                        deleteSale(sale.id_venta);
+                                        deletePerson(person.id_persona);
                                     }}>
                                     <img
                                         src={deleteIcon}
@@ -83,4 +89,4 @@ const SalesTable = () => {
     );
 };
 
-export default SalesTable;
+export default PeopleTable;
